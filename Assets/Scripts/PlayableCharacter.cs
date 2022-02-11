@@ -19,17 +19,6 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
             lightDmg = value;
         }
     }
-    public float DelayLightAtk
-    {
-        get
-        {
-            return delayLightAtk;
-        }
-        set
-        {
-            delayLightAtk = value;
-        }
-    }
     public GameObject LightAttackObject
     {
         get
@@ -50,17 +39,6 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
         set
         {
             heavyDmg = value;
-        }
-    }
-    public float DelayHeavyAtk
-    {
-        get
-        {
-            return delayHeavyAtk;
-        }
-        set
-        {
-            delayHeavyAtk = value;
         }
     }
     public GameObject HeavyAttackbject
@@ -85,17 +63,6 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
             airLightDmg = value;
         }
     }
-    public float DelayAirLightAtk
-    {
-        get
-        {
-            return delayAirLightAtk;
-        }
-        set
-        {
-            delayAirLightAtk = value;
-        }
-    }
     public GameObject AirLightAttackObject
     {
         get
@@ -116,17 +83,6 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
         set
         {
             airHeavyDmg = value;
-        }
-    }
-    public float DelayAirHeavyAtk
-    {
-        get
-        {
-            return delayAirHeavyAtk;
-        }
-        set
-        {
-            delayAirHeavyAtk = value;
         }
     }
     public GameObject AirHeavyAttackObject
@@ -151,17 +107,6 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
             ultimateDmg = value;
         }
     }
-    public float DelayUltimateAtk
-    {
-        get
-        {
-            return delayUltimateAtk;
-        }
-        set
-        {
-            delayUltimateAtk = value;
-        }
-    }
     public GameObject UltimateAttackObject
     {
         get
@@ -182,17 +127,6 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
         set
         {
             distanceAttackDmg = value;
-        }
-    }
-    public float DelayDistanceAtk
-    {
-        get
-        {
-            return delayDistanceAtk;
-        }
-        set
-        {
-            delayDistanceAtk = value;
         }
     }
     public GameObject DistanceAttackObject
@@ -357,37 +291,25 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
     [SerializeField]
     private float lightDmg = 0;
     [SerializeField]
-    private float delayLightAtk = 0;
-    [SerializeField]
     private GameObject lightAttackObject;
     [SerializeField]
     private float heavyDmg = 0;
-    [SerializeField]
-    private float delayHeavyAtk = 0;
     [SerializeField]
     private GameObject heavyAttackObject;
     [SerializeField]
     private float airLightDmg = 0;
     [SerializeField]
-    private float delayAirLightAtk = 0;
-    [SerializeField]
     private GameObject airLightAttackObject;
     [SerializeField]
     private float airHeavyDmg = 0;
-    [SerializeField]
-    private float delayAirHeavyAtk = 0;
     [SerializeField]
     private GameObject airHeavyAttackObject;
     [SerializeField]
     private float ultimateDmg = 0;
     [SerializeField]
-    private float delayUltimateAtk = 0;
-    [SerializeField]
     private GameObject ultimateAttackObject;
     [SerializeField]
     private float distanceAttackDmg = 0;
-    [SerializeField]
-    private float delayDistanceAtk = 0;
     [SerializeField]
     private GameObject distanceAttackObject;
     ///<summary>
@@ -505,7 +427,6 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
     public virtual void DoLightAttack(InputAction.CallbackContext context)
     {
         animator.Play("lightAttack");
-       // StartCoroutine(DoAttack(animator.GetCurrentAnimatorStateInfo(0).length, lightAttackObject, delayLightAtk));
     }
     ///<summary>
     ///
@@ -514,7 +435,6 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
     {
         
         animator.Play("heavyAttack");
-        //StartCoroutine(DoAttack(animator.GetCurrentAnimatorStateInfo(0).length, heavyAttackObject, delayHeavyAtk));
     }
     ///<summary>
     ///
@@ -522,7 +442,6 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
     public virtual void DoUltimateAttack(InputAction.CallbackContext context)
     {
         animator.Play("ultimateAbility");
-       // StartCoroutine(DoAttack(animator.GetCurrentAnimatorStateInfo(0).length, ultimateAttackObject,delayUltimateAtk));
     }
     ///<summary>
     ///
@@ -631,13 +550,6 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
         throw new System.NotImplementedException();
     }
 
-    //private IEnumerator DoAttack(float time, GameObject attackHitBox, float delayTime)
-    //{
-    //    yield return new WaitForSeconds(delayTime);
-    //    attackHitBox.SetActive(true);
-    //    yield return new WaitForSeconds(time);
-    //    attackHitBox.SetActive(false);
-    //}
 
     public void Attack(string attackType)
     {
