@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 8269355904508065267}
   - component: {fileID: 8269355904508065266}
   m_Layer: 0
-  m_Name: HevyAttack
+  m_Name: HeavyAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -370,23 +370,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c73358bb1edb1b4da7ca7ea4ef2b086, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
   lightDmg: 5
-  delayLightAtk: 0.2
   lightAttackObject: {fileID: 8269355903847618213}
   heavyDmg: 10
-  delayHeavyAtk: 0.1
-  heavyAttackbject: {fileID: 8269355904508065268}
+  heavyAttackObject: {fileID: 8269355904508065268}
   airLightDmg: 0
-  delayAirLightAtk: 0
   airLightAttackObject: {fileID: 0}
   airHeavyDmg: 0
-  delayAirHeavyAtk: 0
   airHeavyAttackObject: {fileID: 0}
   ultimateDmg: 3
-  delayUltimateAtk: 0.2
   ultimateAttackObject: {fileID: 8269355903765545305}
   distanceAttackDmg: 0
-  delayDistanceAtk: 0
   distanceAttackObject: {fileID: 0}
   speed: 10
   dashSpeed: 20

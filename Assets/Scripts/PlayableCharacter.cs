@@ -288,6 +288,10 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
 
     public float Health => throw new System.NotImplementedException();
 
+    float IDamageable.Health { get =>  health; set => health = value; }
+
+    [SerializeField]
+    private float health = 0;
     [SerializeField]
     private float lightDmg = 0;
     [SerializeField]
@@ -532,25 +536,40 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
 
     public void SetHealth(float hp)
     {
-        throw new System.NotImplementedException();
+        health = hp;
     }
 
     public void TakeDamage(float dmg)
     {
-        throw new System.NotImplementedException();
+        health -= dmg;
     }
 
     public void HealDamage(float dmg)
     {
-        throw new System.NotImplementedException();
+        health += dmg;
     }
 
     public void DoDamage(IDamageable damageable)
     {
-        throw new System.NotImplementedException();
+        damageable.TakeDamage(10f);
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        switch (collision.gameObject.name)
+        {
+            case "LightAttack":
+                TakeDamage(collision.gameObject.GetComponentInParent<PlayableCharacter>().LightDmg);
+                break;
+            case "HeavyAttack":
+                TakeDamage(collision.gameObject.GetComponentInParent<PlayableCharacter>().HeavyDmg);
+                break;
+            case "UltimateAttack":
+                TakeDamage(collision.gameObject.GetComponentInParent<PlayableCharacter>().UltimateDmg);
+                break;
 
 
+        }
+    }
     public void Attack(string attackType)
     {
         switch (attackType)
