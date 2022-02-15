@@ -140,6 +140,17 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
             distanceAttackObject = value;
         }
     }
+    public GameObject DistanceAttackObjectStartPosition
+    {
+        get
+        {
+            return distanceAttackObjectStartPosition;
+        }
+        set
+        {
+            value = distanceAttackObjectStartPosition;
+        }
+    }
 
     public float Speed
     {
@@ -316,6 +327,8 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
     private float distanceAttackDmg = 0;
     [SerializeField]
     private GameObject distanceAttackObject;
+    [SerializeField]
+    private GameObject distanceAttackObjectStartPosition;
     ///<summary>
     ///Determina qué tan rápido se moverá el objeto.
     ///</summary>
@@ -579,6 +592,9 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
             case "UltimateAttack":
                 TakeDamage(collision.gameObject.GetComponentInParent<PlayableCharacter>().UltimateDmg);
                 break;
+            case "Projectile(Clone)":
+                 TakeDamage(collision.gameObject.GetComponent<Projectile>().Damage);
+                break;
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -601,7 +617,10 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
             case "ultimateAttack":
                 ultimateAttackObject.SetActive(true);
                 break;
-
+            case "distanceAttack":
+                GameObject projectile = Instantiate(distanceAttackObject, distanceAttackObjectStartPosition.transform.position, distanceAttackObjectStartPosition.transform.rotation);
+                projectile.GetComponent<Projectile>().Damage = distanceAttackDmg;
+                break;
         }
     }
     public void EndAttack(string attackType)
