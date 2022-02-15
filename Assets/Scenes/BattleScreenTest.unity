@@ -507,6 +507,14 @@ PrefabInstance:
       propertyPath: m_FlipX
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8269355904609917970, guid: e23a080e3f572d14bb1ec022a07d3f42, type: 3}
+      propertyPath: m_Size.y
+      value: 0.77076924
+      objectReference: {fileID: 0}
+    - target: {fileID: 8269355904609917970, guid: e23a080e3f572d14bb1ec022a07d3f42, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.010162666
+      objectReference: {fileID: 0}
     - target: {fileID: 8269355904609917972, guid: e23a080e3f572d14bb1ec022a07d3f42, type: 3}
       propertyPath: m_Name
       value: Cowboy

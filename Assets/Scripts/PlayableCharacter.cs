@@ -411,7 +411,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
     ///La direccion a la que se esta moviendo el jugador con el dash.
     ///</summary>
     private Vector2 dashDirection = Vector2.zero;
-
+    
     protected Animator animator;
 
     ///<summary>
@@ -461,6 +461,16 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
     public virtual void Move(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
+        
+        if(moveInput.x < 0)
+        {
+            gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+        else if(moveInput.x > 0)
+        {
+            gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        animator.Play("run");
     }
 
     ///<summary>
@@ -474,6 +484,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
             if (startJumps > 0 || touchingFloor)
             {
                 rb.velocity += Vector2.up * jumpHight;
+                animator.Play("jump");
             }
             if (touchingFloor)
             {
@@ -488,6 +499,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
         {
             if (!dashIsActive && rb.velocity != Vector2.zero)
             {
+                animator.Play("dash");
                 if (rb.velocity.x < 0)
                 {
                     dashDirection += Vector2.left;
@@ -553,6 +565,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
     {
         damageable.TakeDamage(10f);
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         switch (collision.gameObject.name)
@@ -566,8 +579,13 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
             case "UltimateAttack":
                 TakeDamage(collision.gameObject.GetComponentInParent<PlayableCharacter>().UltimateDmg);
                 break;
-
-
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.layer == 3)
+        {
+            animator.Play("IdleAnimation");
         }
     }
     public void Attack(string attackType)
