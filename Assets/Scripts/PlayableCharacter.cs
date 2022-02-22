@@ -581,7 +581,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        switch (collision.gameObject.name)
+        switch (collision.gameObject.tag)
         {
             case "LightAttack":
                 TakeDamage(collision.gameObject.GetComponentInParent<PlayableCharacter>().LightDmg);
@@ -592,7 +592,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
             case "UltimateAttack":
                 TakeDamage(collision.gameObject.GetComponentInParent<PlayableCharacter>().UltimateDmg);
                 break;
-            case "Projectile(Clone)":
+            case "Projectile":
                  TakeDamage(collision.gameObject.GetComponent<Projectile>().Damage);
                 break;
         }
@@ -609,12 +609,15 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
         switch (attackType)
         {
             case "lightAttack":
+                lightAttackObject.SetActive(false);
                 lightAttackObject.SetActive(true);
                 break;
             case "heavyAttack":
+                heavyAttackObject.SetActive(false);
                 heavyAttackObject.SetActive(true);
                 break;
             case "ultimateAttack":
+                ultimateAttackObject.SetActive(false);
                 ultimateAttackObject.SetActive(true);
                 break;
             case "distanceAttack":

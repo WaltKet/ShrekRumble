@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1761551794
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1761551795}
+  m_Layer: 0
+  m_Name: Distance attack object start position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1761551795
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1761551794}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.47, y: 0.293, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8269355904609917983}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8269355903376760032
 GameObject:
   m_ObjectHideFlags: 0
@@ -42,7 +72,7 @@ GameObject:
   - component: {fileID: 8269355903765545255}
   m_Layer: 0
   m_Name: UltimateAttack
-  m_TagString: Untagged
+  m_TagString: UltimateAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,7 +129,7 @@ GameObject:
   - component: {fileID: 8269355903847618211}
   m_Layer: 0
   m_Name: LightAttack
-  m_TagString: Untagged
+  m_TagString: LightAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -156,7 +186,7 @@ GameObject:
   - component: {fileID: 8269355904508065266}
   m_Layer: 0
   m_Name: HeavyAttack
-  m_TagString: Untagged
+  m_TagString: HeavyAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -238,6 +268,7 @@ Transform:
   - {fileID: 8269355903847618212}
   - {fileID: 8269355904508065267}
   - {fileID: 8269355903765545304}
+  - {fileID: 1761551795}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -326,7 +357,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.031025052, y: 0.022353739}
+  m_Offset: {x: -0.031025052, y: 0.010162666}
   m_SpriteTilingProperty:
     border: {x: 0.78999996, y: 0.90999997, z: 0.87, w: 0.87}
     pivot: {x: 0.5, y: 0.5}
@@ -337,7 +368,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.28897, y: 0.74638706}
+  m_Size: {x: 0.28897, y: 0.77076924}
   m_EdgeRadius: 0
 --- !u!95 &8269355904609917971
 Animator:
@@ -381,8 +412,9 @@ MonoBehaviour:
   airHeavyAttackObject: {fileID: 0}
   ultimateDmg: 3
   ultimateAttackObject: {fileID: 8269355903765545305}
-  distanceAttackDmg: 0
-  distanceAttackObject: {fileID: 0}
+  distanceAttackDmg: 5
+  distanceAttackObject: {fileID: 2969268015713512816, guid: 70fbe9520b3138f45b0dc916e06743b9, type: 3}
+  distanceAttackObjectStartPosition: {fileID: 1761551794}
   speed: 10
   dashSpeed: 20
   dashTime: 0.3
