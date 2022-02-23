@@ -414,6 +414,7 @@ MonoBehaviour:
   ultimateAttackObject: {fileID: 8269355903765545305}
   distanceAttackDmg: 5
   distanceAttackObject: {fileID: 2969268015713512816, guid: 70fbe9520b3138f45b0dc916e06743b9, type: 3}
+  maxDistanceAttackObject: 4
   distanceAttackObjectStartPosition: {fileID: 1761551794}
   speed: 10
   dashSpeed: 20

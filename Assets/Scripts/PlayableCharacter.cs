@@ -140,6 +140,17 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
             distanceAttackObject = value;
         }
     }
+    public int MaxDistanceAttackObject
+    {
+        get
+        {
+            return maxDistanceAttackObject;
+        }
+        set
+        {
+            maxDistanceAttackObject = value;
+        }
+    }
     public GameObject DistanceAttackObjectStartPosition
     {
         get
@@ -328,108 +339,49 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
     [SerializeField]
     private GameObject distanceAttackObject;
     [SerializeField]
+    private int maxDistanceAttackObject;
+    [SerializeField]
     private GameObject distanceAttackObjectStartPosition;
-    ///<summary>
-    ///Determina qué tan rápido se moverá el objeto.
-    ///</summary>
+
     [SerializeField]
     private float speed = 0;
-    ///<summary>
-    ///Determina qué tan rápido será el ”Dash” del objeto.
-    ///</summary>
     [SerializeField]
-    private float dashSpeed = 0;
-    ///<summary>
-    ///Determina la duración del “Dash”.
-    ///</summary>
+    private float dashSpeed = 0;    
     [SerializeField]
     private float dashTime = 0;
-    ///<summary>
-    ///Determina la altura de los saltos del objeto.
-    ///</summary>
     [SerializeField]
     private float jumpHight = 0;
-    ///<summary>
-    ///Determina cuántos saltos extra podrá realizar el objeto antes de tener que tocar el suelo 
-    ///(por default el objeto puede saltar una vez, si el valor de la variable ExtraJumps es 1 entonces el objeto podrá saltar 2 veces).
-    ///</summary>
     [SerializeField]
     private int extreJumps = 0;
-    ///<summary>
-    ///Determina el radio del círculo que se utiliza para determinar si el objeto está tocando el suelo.
-    ///</summary>
     [SerializeField]
     private float checkRadius;
-    ///<summary>
-    ///Determina si el objeto podrá usar el “Dash”.
-    ///</summary>
     [SerializeField]
     private bool activateDash = true;
-    ///<summary>
-    ///Determina si el objeto utiliza velocidad o fuerza para moverse.
-    ///Si se desea utilizar fuerzas, se recomienda que se modifiquen valores del rigidbody 2D como mass, linear drag, angular drag y gravity scale.
-    ///</summary>
     [SerializeField]
     private bool usesForceMovement = false;
-    ///<summary>
-    ///Es el nombre del botón que hará que el elemento salte.
-    ///</summary>
     [SerializeField]
     private string jumpButton;
-    ///<summary>
-    ///Determina el botón que activará el dash, utiliza la nomenclatura de botones de Unity.
-    ///</summary>
     [SerializeField]
     private string dashButton;
-    ///<summary>
-    ///Este es el TRANSFORM del hijo vacío del objeto (la posición de los pies del avatar del jugador).
-    ///</summary>
     [SerializeField]
     private Transform feetPos;
-    ///<summary>
-    ///El RigidBody2D del objeto.
-    ///</summary>
     [SerializeField]
     private Rigidbody2D rb;
-    ///<summary>
-    ///Esta es una LayerMask la cual determina los objetos considerados suelo. Los saltos del objeto sólo se reiniciarán cuando el círculo, 
-    ///cuyo centro es el hijo vacío del objeto, se sobreponga a un objeto que esté en la misma capa que el valor de la variable Floor.
-    ///</summary>
     [SerializeField]
     private LayerMask floor;
 
-    ///<summary>
-    ///Determina hasia donde se movera el jugador
-    ///</summary>
     [SerializeField]
     private Vector2 moveInput;
 
-    ///<summary>
-    ///Referencia al valor original de startDashTime
-    ///</summary>
     private float startingDashTime = 0;
-    ///<summary>
-    ///Referencia al valor original de extreJumps
-    ///</summary>
     private int startJumps = 0;
-    ///<summary>
-    ///Indica si se esta tocando el piso.
-    ///</summary>
     private bool touchingFloor = true;
-    ///<summary>
-    ///Indica si el dash se esta usando.
-    ///</summary>
     private bool dashIsActive = false;
-    ///<summary>
-    ///La direccion a la que se esta moviendo el jugador con el dash.
-    ///</summary>
     private Vector2 dashDirection = Vector2.zero;
-    
+    private List<GameObject> projectileList = new List<GameObject>();
+
     protected Animator animator;
 
-    ///<summary>
-    ///Inicializa variables.
-    ///</summary>
     protected virtual void Start()
     {
         startingDashTime = dashTime;
@@ -438,39 +390,27 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
         animator = gameObject.GetComponent<Animator>();
     }
     
-    ///<summary>
-    ///
-    ///</summary>
     public virtual void DoLightAttack(InputAction.CallbackContext context)
     {
         animator.Play("lightAttack");
     }
-    ///<summary>
-    ///
-    ///</summary>
+
     public virtual void DoHeavyAttack(InputAction.CallbackContext context)
     {
         
         animator.Play("heavyAttack");
     }
-    ///<summary>
-    ///
-    ///</summary>
+
     public virtual void DoUltimateAttack(InputAction.CallbackContext context)
     {
         animator.Play("ultimateAbility");
     }
-    ///<summary>
-    ///
-    ///</summary>
+
     public virtual void DoDistanceAttack(InputAction.CallbackContext context)
     {
         animator.Play("specialAbility");
     }
 
-    ///<summary>
-    ///Indica hascia donde se desplazara el jugador
-    ///</summary>
     public virtual void Move(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
@@ -486,9 +426,6 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
         animator.Play("run");
     }
 
-    ///<summary>
-    ///
-    ///</summary>
     public void Jump(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -526,9 +463,6 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
         }
     }
 
-    ///<summary>
-    ///Desplaza al jugador de izquierda a derecha
-    ///</summary>
     private void FixedUpdate()
     {
         if (!dashIsActive)
@@ -537,9 +471,6 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
         }
     }
 
-    ///<summary>
-    ///Aplica el dash al avatar del jugador.
-    ///</summary>
     private void Update()
     {
         if(dashIsActive)
@@ -621,8 +552,24 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
                 ultimateAttackObject.SetActive(true);
                 break;
             case "distanceAttack":
-                GameObject projectile = Instantiate(distanceAttackObject, distanceAttackObjectStartPosition.transform.position, distanceAttackObjectStartPosition.transform.rotation);
-                projectile.GetComponent<Projectile>().Damage = distanceAttackDmg;
+                if(projectileList.Count < maxDistanceAttackObject)
+                {
+                    GameObject projectile = Instantiate(distanceAttackObject, distanceAttackObjectStartPosition.transform.position, distanceAttackObjectStartPosition.transform.rotation);
+                    projectile.GetComponent<Projectile>().Damage = distanceAttackDmg;
+                    projectileList.Add(projectile);
+                }
+                else
+                {
+                    foreach(GameObject projectile in projectileList)
+                    {
+                        if (!projectile.activeSelf)
+                        {
+                            projectile.transform.position = distanceAttackObjectStartPosition.transform.position;
+                            projectile.GetComponent<Projectile>().ReactivateProjectile();
+                            break;
+                        }
+                    }
+                }
                 break;
         }
     }

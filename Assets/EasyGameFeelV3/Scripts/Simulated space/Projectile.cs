@@ -142,6 +142,14 @@ public class Projectile : ProjectileFather
         rb.simulated = false;
         rb.velocity = Vector2.zero;
         yield return new WaitForSeconds(hitSoundLength);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+    }
+
+    public void ReactivateProjectile()
+    {
+        gameObject.SetActive(true);
+        gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        rb.simulated = true;
+        rb.AddForce(gameObject.transform.right * speed, ForceMode2D.Impulse);
     }
 }
