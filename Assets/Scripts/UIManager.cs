@@ -5,22 +5,30 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject UIElement;
-    Canvas canvas;
-    PlayableCharacter[] Players;
-    List<GameObject> UIElementList = new List<GameObject>();
+    GameObject UIElementContainer;
+    [SerializeField]
+    List<GameObject> UIElements;
+    [SerializeField]
+    List<Vector2> UIElementContainerPositions;
 
-    public void SetUIElements(PlayableCharacter[] elements)
+    public void SetUIElements(int[] PlayerSelectedCharacter)
     {
-        canvas = GameObject.FindObjectOfType<Canvas>();
-        Players = elements;
-        foreach(var player in elements)
+        switch (PlayerSelectedCharacter.Length)
         {
-            GameObject element = Instantiate(UIElement, new Vector2(0,0), UIElement.transform.rotation, canvas.transform);
-            UIElementList.Add(element);
-            element.transform.position = new Vector2(Screen.height / (elements.Length * 2), UIElement.transform.position.y);
-
-
+            case 2:
+                UIElementContainer.transform.localPosition = UIElementContainerPositions[0];
+                break;
+            case 3:
+                UIElementContainer.transform.localPosition = UIElementContainerPositions[1];
+                break;
+            case 4:
+                UIElementContainer.transform.localPosition = UIElementContainerPositions[2];
+                break;
+        }
+        for (int i = 0; i < PlayerSelectedCharacter.Length; i++)
+        {
+            UIElements[i].SetActive(true);
         }
     }
+
 }

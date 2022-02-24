@@ -43,4 +43,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c335ddaff52c4542b812d4a529f71ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UIElement: {fileID: 853941329343273483, guid: 7cf44b1ade8608748826c5744e036312, type: 3}
+  UIElementContainer: {fileID: 0}
+  UIElements:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  UIElementContainerPositions:
+  - {x: 271, y: 0}
+  - {x: 135.5, y: 0}
+  - {x: 0, y: 0}
