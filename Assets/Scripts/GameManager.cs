@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GameManager : MonoBehaviour
+public class GameManager : GenericSingletonClass<GameManager>
 {
     public UIManager uIManager;
     PlayableCharacter[] CharactersInGame;
@@ -27,6 +27,11 @@ public class GameManager : MonoBehaviour
     }
     // Update is called once per frame
     void Update()
+    {
+        
+    }
+
+    public void BuildMatch(Match match)
     {
         
     }

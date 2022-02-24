@@ -9,10 +9,6 @@ public class UIManager : MonoBehaviour
     Canvas canvas;
     PlayableCharacter[] Players;
     List<GameObject> UIElementList = new List<GameObject>();
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
 
     public void SetUIElements(PlayableCharacter[] elements)
     {
@@ -22,14 +18,9 @@ public class UIManager : MonoBehaviour
         {
             GameObject element = Instantiate(UIElement, new Vector2(0,0), UIElement.transform.rotation, canvas.transform);
             UIElementList.Add(element);
-            element.transform.localPosition = new Vector2(Screen.width / (elements.Length * 2), UIElement.transform.position.y);
+            element.transform.position = new Vector2(Screen.height / (elements.Length * 2), UIElement.transform.position.y);
 
 
         }
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
