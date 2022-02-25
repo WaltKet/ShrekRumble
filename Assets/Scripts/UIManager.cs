@@ -11,7 +11,7 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     List<Vector2> UIElementContainerPositions;
 
-    public void SetUIElements(int[] PlayerSelectedCharacter)
+    public void SetUIElements(PlayableCharacter[] PlayerSelectedCharacter)
     {
         switch (PlayerSelectedCharacter.Length)
         {
