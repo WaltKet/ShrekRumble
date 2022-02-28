@@ -571,15 +571,12 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
         switch (attackType)
         {
             case "lightAttack":
-                lightAttackObject.SetActive(false);
                 lightAttackObject.SetActive(true);
                 break;
             case "heavyAttack":
-                heavyAttackObject.SetActive(false);
                 heavyAttackObject.SetActive(true);
                 break;
             case "ultimateAttack":
-                ultimateAttackObject.SetActive(false);
                 ultimateAttackObject.SetActive(true);
                 break;
             case "distanceAttack":

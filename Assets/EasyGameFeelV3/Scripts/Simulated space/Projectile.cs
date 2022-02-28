@@ -151,5 +151,6 @@ public class Projectile : ProjectileFather
         gameObject.GetComponent<SpriteRenderer>().enabled = true;
         rb.simulated = true;
         rb.AddForce(gameObject.transform.right * speed, ForceMode2D.Impulse);
+        initialPosition = transform.position;
     }
 }
