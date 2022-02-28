@@ -307,6 +307,13 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
             floor = value;
         }
     }
+    public bool Invincible
+    {
+        set
+        {
+            invincible = value;
+        }
+    }
 
     public float Health => throw new System.NotImplementedException();
 
@@ -369,6 +376,8 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
     private Rigidbody2D rb;
     [SerializeField]
     private LayerMask floor;
+    [SerializeField]
+    private bool invincible = false;
 
     [SerializeField]
     private Vector2 moveInput;
@@ -388,6 +397,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
         startJumps = extreJumps;
         rb = gameObject.GetComponent<Rigidbody2D>();
         animator = gameObject.GetComponent<Animator>();
+        EventManager.playerSpawnEvent += RestoreHealth;
     }
     
     public virtual void DoLightAttack(InputAction.CallbackContext context)
@@ -498,6 +508,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
     public void TakeDamage(float dmg)
     {
         health -= dmg;
+        Die();
     }
 
     public void HealDamage(float dmg)
@@ -510,22 +521,42 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
         damageable.TakeDamage(10f);
     }
 
+    private void Die()
+    {
+        if (health <= 0)
+        {
+            animator.Play("death");
+            EventManager.PlayerDeath(gameObject);
+        }
+    }
+
+    private void RestoreHealth()
+    {
+        health = 100;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        switch (collision.gameObject.tag)
+        Debug.Log("aqui1");
+        if (!invincible)
         {
-            case "LightAttack":
-                TakeDamage(collision.gameObject.GetComponentInParent<PlayableCharacter>().LightDmg);
-                break;
-            case "HeavyAttack":
-                TakeDamage(collision.gameObject.GetComponentInParent<PlayableCharacter>().HeavyDmg);
-                break;
-            case "UltimateAttack":
-                TakeDamage(collision.gameObject.GetComponentInParent<PlayableCharacter>().UltimateDmg);
-                break;
-            case "Projectile":
-                 TakeDamage(collision.gameObject.GetComponent<Projectile>().Damage);
-                break;
+            Debug.Log("aqui");
+            switch (collision.gameObject.tag)
+            {
+                case "LightAttack":
+                    TakeDamage(collision.gameObject.GetComponentInParent<PlayableCharacter>().LightDmg);
+                    break;
+                case "HeavyAttack":
+                    Debug.Log("aqui2");
+                    TakeDamage(collision.gameObject.GetComponentInParent<PlayableCharacter>().HeavyDmg);
+                    break;
+                case "UltimateAttack":
+                    TakeDamage(collision.gameObject.GetComponentInParent<PlayableCharacter>().UltimateDmg);
+                    break;
+                case "Projectile":
+                    TakeDamage(collision.gameObject.GetComponent<Projectile>().Damage);
+                    break;
+            }
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -565,6 +596,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
                         if (!projectile.activeSelf)
                         {
                             projectile.transform.position = distanceAttackObjectStartPosition.transform.position;
+                            projectile.transform.rotation = distanceAttackObjectStartPosition.transform.rotation;
                             projectile.GetComponent<Projectile>().ReactivateProjectile();
                             break;
                         }

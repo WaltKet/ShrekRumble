@@ -8,6 +8,7 @@ TagManager:
   - HeavyAttack
   - UltimateAttack
   - Projectile
+  - Spawner
   layers:
   - Default
   - TransparentFX

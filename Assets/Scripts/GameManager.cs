@@ -8,13 +8,13 @@ public class GameManager : GenericSingletonClass<GameManager>
     public UIManager uIManager;
     PlayableCharacter[] CharactersInGame;
     public static UnityEvent<int> UICreate;
+
     // Start is called before the first frame update
     void Start()
     {
         CharactersInGame = FindObjectsOfType<PlayableCharacter>();
     }
 
-    
     public void StartGame()
     {
         var uiMan = Instantiate(uIManager);
@@ -25,6 +25,7 @@ public class GameManager : GenericSingletonClass<GameManager>
     {
         return CharactersInGame;
     }
+
     // Update is called once per frame
     void Update()
     {
