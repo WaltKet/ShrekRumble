@@ -149,7 +149,7 @@ Animator:
   m_GameObject: {fileID: 496462350536754923}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3ecdc05d9b1ba3944beefeb1696b672f, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3a17ee0468a09de4eb9a6850ae21035a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -185,7 +185,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8269355904609917982, guid: e23a080e3f572d14bb1ec022a07d3f42, type: 3}
+      - m_Target: {fileID: 8368091085101390577}
         m_TargetAssemblyTypeName: PlayableCharacter, Assembly-CSharp
         m_MethodName: Move
         m_Mode: 0
@@ -241,7 +241,7 @@ MonoBehaviour:
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8269355904609917982, guid: e23a080e3f572d14bb1ec022a07d3f42, type: 3}
+      - m_Target: {fileID: 8368091085101390577}
         m_TargetAssemblyTypeName: PlayableCharacter, Assembly-CSharp
         m_MethodName: Jump
         m_Mode: 0
@@ -257,7 +257,7 @@ MonoBehaviour:
     m_ActionName: Player/Jump[/Keyboard/space]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8269355904609917982, guid: e23a080e3f572d14bb1ec022a07d3f42, type: 3}
+      - m_Target: {fileID: 8368091085101390577}
         m_TargetAssemblyTypeName: PlayableCharacter, Assembly-CSharp
         m_MethodName: DoLightAttack
         m_Mode: 0
@@ -273,7 +273,7 @@ MonoBehaviour:
     m_ActionName: Player/LightAttack[/Keyboard/f]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8269355904609917982, guid: e23a080e3f572d14bb1ec022a07d3f42, type: 3}
+      - m_Target: {fileID: 8368091085101390577}
         m_TargetAssemblyTypeName: PlayableCharacter, Assembly-CSharp
         m_MethodName: DoHeavyAttack
         m_Mode: 0
@@ -289,7 +289,7 @@ MonoBehaviour:
     m_ActionName: Player/HeavyAttack[/Keyboard/g]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8269355904609917982, guid: e23a080e3f572d14bb1ec022a07d3f42, type: 3}
+      - m_Target: {fileID: 8368091085101390577}
         m_TargetAssemblyTypeName: PlayableCharacter, Assembly-CSharp
         m_MethodName: DoDistanceAttack
         m_Mode: 0
@@ -305,7 +305,7 @@ MonoBehaviour:
     m_ActionName: Player/DistanceAttack[/Keyboard/h]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8269355904609917982, guid: e23a080e3f572d14bb1ec022a07d3f42, type: 3}
+      - m_Target: {fileID: 8368091085101390577}
         m_TargetAssemblyTypeName: PlayableCharacter, Assembly-CSharp
         m_MethodName: DoUltimateAttack
         m_Mode: 0
@@ -321,7 +321,7 @@ MonoBehaviour:
     m_ActionName: Player/UltimateAttack[/Keyboard/j]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8269355904609917982, guid: e23a080e3f572d14bb1ec022a07d3f42, type: 3}
+      - m_Target: {fileID: 8368091085101390577}
         m_TargetAssemblyTypeName: PlayableCharacter, Assembly-CSharp
         m_MethodName: Dash
         m_Mode: 0
