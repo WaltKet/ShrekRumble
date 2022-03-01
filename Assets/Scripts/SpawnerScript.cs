@@ -16,10 +16,10 @@ public class SpawnerScript : MonoBehaviour
 
     private void SpawnPlayer(GameObject player)
     {
-        StartCoroutine(spawn(player));
+        StartCoroutine(Spawn(player));
     }
 
-    private IEnumerator spawn(GameObject player)
+    private IEnumerator Spawn(GameObject player)
     {
         yield return new WaitForSeconds(respawnTime);
         EventManager.playerSpawn();

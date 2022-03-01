@@ -407,7 +407,6 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
 
     public virtual void DoHeavyAttack(InputAction.CallbackContext context)
     {
-        
         animator.Play("heavyAttack");
     }
 
@@ -483,20 +482,19 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
 
     private void Update()
     {
-        if(dashIsActive)
+        if (!dashIsActive) return;
+        
+        if (startingDashTime < 0)
         {
-            if (startingDashTime < 0)
-            {
-                dashIsActive = false;
-                startingDashTime = dashTime;
-                dashDirection = Vector2.zero;
-                rb.velocity = Vector2.zero;
-            }
-            else if (dashIsActive)
-            {
-                startingDashTime -= Time.deltaTime;
-                rb.velocity = dashDirection * dashSpeed;
-            }
+            dashIsActive = false;
+            startingDashTime = dashTime;
+            dashDirection = Vector2.zero;
+            rb.velocity = Vector2.zero;
+        }
+        else if (dashIsActive)
+        {
+            startingDashTime -= Time.deltaTime;
+            rb.velocity = dashDirection * dashSpeed;
         }
     }
 

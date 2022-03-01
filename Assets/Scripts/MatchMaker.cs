@@ -9,7 +9,10 @@ public class MatchMaker : GenericSingletonClass<MatchMaker>
 
     public int PlayerCount 
     {
-        get => playerCount;
+        get
+        {
+           return playerCount;
+        }
         set
         {
             playerCount = value;
@@ -17,12 +20,36 @@ public class MatchMaker : GenericSingletonClass<MatchMaker>
         }
     }
 
-    private int playerCount;
     
-    public string CurrentSelectedStage { get; set;}
-    public int[] PlayerSelectedCharacter { get; set;}
+    public string CurrentSelectedStage 
+    {
+        get
+        {
+            return currentSelectedStage;
+        }
+        set
+        {
+            currentSelectedStage = value;
+        }
+        
+    }
 
-    void StartMatch()
+    public int[] PlayerSelectedCharacter
+    {
+        get
+        {
+            return playerSelectedCharacter;
+        }
+        set
+        {
+            playerSelectedCharacter = value;
+        }
+    }
+
+    private int playerCount;
+    private string currentSelectedStage;
+    private int[] playerSelectedCharacter;
+    private void StartMatch()
     {
         var match = GenerateMatchInfo();
         GameManager.Instance.BuildMatch(match);
@@ -39,7 +66,7 @@ public class MatchMaker : GenericSingletonClass<MatchMaker>
         return false;
     }
 
-    Match GenerateMatchInfo()
+    private Match GenerateMatchInfo()
     {
         return new Match(PlayerCount, CurrentSelectedStage, PlayerSelectedCharacter);
     }
