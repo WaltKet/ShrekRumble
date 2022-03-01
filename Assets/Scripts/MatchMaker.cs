@@ -7,6 +7,7 @@ public class MatchMaker : GenericSingletonClass<MatchMaker>
     //Este script maneja la seleccion de personajes, y le envía la información al gameManager para que este
     // construya la partida.
 
+    //Cambie el estilo de las propiedades para que se ajusten al resto del proyecto
     public int PlayerCount 
     {
         get

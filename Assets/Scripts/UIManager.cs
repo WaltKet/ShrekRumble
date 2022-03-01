@@ -5,11 +5,11 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject UIElementContainer;
+    private GameObject UIElementContainer;
     [SerializeField]
-    List<GameObject> UIElements;
+    private List<GameObject> UIElements;
     [SerializeField]
-    List<Vector2> UIElementContainerPositions;
+    private List<Vector2> UIElementContainerPositions;
 
     public void SetUIElements(PlayableCharacter[] PlayerSelectedCharacter)
     {
