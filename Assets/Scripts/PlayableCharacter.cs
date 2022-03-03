@@ -382,6 +382,9 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
     [SerializeField]
     private Vector2 moveInput;
 
+    [SerializeField] 
+    private PlayerEvents_ScriptableObject playerEvents;
+
     private float startingDashTime = 0;
     private int startJumps = 0;
     private bool touchingFloor = true;
@@ -397,7 +400,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
         startJumps = extreJumps;
         rb = gameObject.GetComponent<Rigidbody2D>();
         animator = gameObject.GetComponent<Animator>();
-        EventManager.playerSpawnEvent += RestoreHealth;
+        playerEvents.PlayerSpawnEvent.AddListener(RestoreHealth);
     }
     
     public virtual void DoLightAttack(InputAction.CallbackContext context)
@@ -522,13 +525,13 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
     private void Die()
     {
         if (health <= 0)
-        {
+        { 
             animator.Play("death");
-            EventManager.PlayerDeath(gameObject);
+           playerEvents.PlayerDeathEvent?.Invoke(this);
         }
     }
 
-    private void RestoreHealth()
+    private void RestoreHealth(PlayableCharacter pChar) //Este método deberia estar en un control separado
     {
         health = 100;
     }
