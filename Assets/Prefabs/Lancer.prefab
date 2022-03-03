@@ -382,7 +382,9 @@ MonoBehaviour:
   floor:
     serializedVersion: 2
     m_Bits: 0
+  invincible: 0
   moveInput: {x: 0, y: 0}
+  playerEvents: {fileID: 11400000, guid: 791d84b283b9143cdacd15bc66cd7823, type: 2}
 --- !u!1 &496462350651469579
 GameObject:
   m_ObjectHideFlags: 0
