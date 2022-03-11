@@ -129,6 +129,10 @@ public class Projectile : ProjectileFather
             {
                 AudioSource.PlayOneShot(HitSound);
             }
+            if(collision.gameObject.GetComponent<PlayableCharacter>())
+            {
+                collision.gameObject.GetComponent<PlayableCharacter>().TakeDamage(Damage);
+            }
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
             StartCoroutine(DestroyProyectile());
         }

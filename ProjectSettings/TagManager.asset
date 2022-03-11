@@ -9,6 +9,7 @@ TagManager:
   - UltimateAttack
   - Projectile
   - Spawner
+  - Cowboy
   layers:
   - Default
   - TransparentFX

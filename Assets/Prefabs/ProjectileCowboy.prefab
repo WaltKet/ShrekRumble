@@ -236,9 +236,11 @@ MonoBehaviour:
   audioSource: {fileID: 2486393749971322023}
   hitSound: {fileID: 0}
   speed: 6
-  maxDistance: 3
+  maxDistance: 10
   dontDestroyOnCollision:
-  - 
+  - LightAttack
+  - HeavyAttack
+  - UltimateAttack
   rb: {fileID: 2541809163410896624}
 --- !u!95 &3886894046206467338
 Animator:

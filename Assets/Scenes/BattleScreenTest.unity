@@ -1158,8 +1158,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1761551795, guid: e23a080e3f572d14bb1ec022a07d3f42, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.484
+      objectReference: {fileID: 0}
     - target: {fileID: 8269355904609917972, guid: e23a080e3f572d14bb1ec022a07d3f42, type: 3}
       propertyPath: m_Name
+      value: Cowboy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8269355904609917972, guid: e23a080e3f572d14bb1ec022a07d3f42, type: 3}
+      propertyPath: m_TagString
       value: Cowboy
       objectReference: {fileID: 0}
     - target: {fileID: 8269355904609917983, guid: e23a080e3f572d14bb1ec022a07d3f42, type: 3}
