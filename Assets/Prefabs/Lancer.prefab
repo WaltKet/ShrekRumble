@@ -354,34 +354,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   lightDmg: 0
-  lightAttackObject: {fileID: 0}
+  lightAttackObject: {fileID: 496462351299054682}
   heavyDmg: 0
-  heavyAttackObject: {fileID: 0}
+  heavyAttackObject: {fileID: 496462350651469579}
   airLightDmg: 0
-  airLightAttackObject: {fileID: 0}
+  airLightAttackObject: {fileID: 496462351299054682}
   airHeavyDmg: 0
-  airHeavyAttackObject: {fileID: 0}
+  airHeavyAttackObject: {fileID: 496462350651469579}
   ultimateDmg: 0
-  ultimateAttackObject: {fileID: 0}
+  ultimateAttackObject: {fileID: 496462351385320358}
   distanceAttackDmg: 0
   distanceAttackObject: {fileID: 0}
   maxDistanceAttackObject: 0
   distanceAttackObjectStartPosition: {fileID: 0}
-  speed: 0
-  dashSpeed: 0
-  dashTime: 0
-  jumpHight: 0
+  speed: 10
+  dashSpeed: 20
+  dashTime: 0.3
+  jumpHight: 11
   extreJumps: 0
-  checkRadius: 0
+  checkRadius: 0.3
   activateDash: 1
   usesForceMovement: 0
   jumpButton: 
   dashButton: 
-  feetPos: {fileID: 0}
-  rb: {fileID: 0}
+  feetPos: {fileID: 496462351769912848}
+  rb: {fileID: 496462350536754926}
   floor:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
+  invincible: 0
   moveInput: {x: 0, y: 0}
 --- !u!1 &496462350651469579
 GameObject:
@@ -399,7 +400,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &496462350651469580
 Transform:
   m_ObjectHideFlags: 0
@@ -456,7 +457,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &496462351299054683
 Transform:
   m_ObjectHideFlags: 0
@@ -513,7 +514,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &496462351385320359
 Transform:
   m_ObjectHideFlags: 0

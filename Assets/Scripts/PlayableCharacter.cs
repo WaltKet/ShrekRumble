@@ -391,6 +391,9 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
 
     protected Animator animator;
 
+    List<Collider2D> enemiesToHit = new List<Collider2D>();
+    ContactFilter2D contactFilter = new ContactFilter2D();
+
     protected virtual void Start()
     {
         startingDashTime = dashTime;
@@ -409,7 +412,11 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
     {
         animator.Play("heavyAttack");
     }
-
+    public virtual void Hurt()
+    {
+        if (health > 0)
+        animator.Play("hurt");
+    }
     public virtual void DoUltimateAttack(InputAction.CallbackContext context)
     {
         animator.Play("ultimateAbility");
@@ -533,30 +540,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
         health = 100;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Debug.Log("aqui1");
-        if (!invincible)
-        {
-            Debug.Log("aqui");
-            switch (collision.gameObject.tag)
-            {
-                case "LightAttack":
-                    TakeDamage(collision.gameObject.GetComponentInParent<PlayableCharacter>().LightDmg);
-                    break;
-                case "HeavyAttack":
-                    Debug.Log("aqui2");
-                    TakeDamage(collision.gameObject.GetComponentInParent<PlayableCharacter>().HeavyDmg);
-                    break;
-                case "UltimateAttack":
-                    TakeDamage(collision.gameObject.GetComponentInParent<PlayableCharacter>().UltimateDmg);
-                    break;
-                case "Projectile":
-                    TakeDamage(collision.gameObject.GetComponent<Projectile>().Damage);
-                    break;
-            }
-        }
-    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.layer == 3)
@@ -564,18 +548,35 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
             animator.Play("IdleAnimation");
         }
     }
+
+    private void DamageEnemiesInCollider(float damageValue)
+    {
+        if (enemiesToHit.Count > 0)
+        {
+            foreach (Collider2D enemy in enemiesToHit)
+            {
+                enemy.GetComponent<PlayableCharacter>().TakeDamage(damageValue);
+                enemy.GetComponent<PlayableCharacter>().Hurt();
+            }
+            enemiesToHit.Clear();
+        }
+    }
     public void Attack(string attackType)
     {
+        float damageValue = 0;
         switch (attackType)
         {
             case "lightAttack":
-                lightAttackObject.SetActive(true);
+                LightAttackObject.gameObject.GetComponent<Collider2D>().OverlapCollider(contactFilter, enemiesToHit);
+                damageValue = LightDmg;
                 break;
             case "heavyAttack":
-                heavyAttackObject.SetActive(true);
+                HeavyAttackbject.gameObject.GetComponent<Collider2D>().OverlapCollider(contactFilter, enemiesToHit);
+                damageValue = heavyDmg;
                 break;
             case "ultimateAttack":
-                ultimateAttackObject.SetActive(true);
+                UltimateAttackObject.gameObject.GetComponent<Collider2D>().OverlapCollider(contactFilter, enemiesToHit);
+                damageValue = ultimateDmg;
                 break;
             case "distanceAttack":
                 if(projectileList.Count < maxDistanceAttackObject)
@@ -599,21 +600,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
                 }
                 break;
         }
-    }
-    public void EndAttack(string attackType)
-    {
-        switch (attackType)
-        {
-            case "lightAttack":
-                lightAttackObject.SetActive(false);
-                break;
-            case "heavyAttack":
-                heavyAttackObject.SetActive(false);
-                break;
-            case "ultimateAttack":
-                ultimateAttackObject.SetActive(false);
-                break;
+        DamageEnemiesInCollider(damageValue);
 
-        }
     }
 }
