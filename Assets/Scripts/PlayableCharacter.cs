@@ -383,15 +383,20 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
     private Vector2 moveInput;
 
     private float startingDashTime = 0;
+    private float damageValue = 0;
     private int startJumps = 0;
+    private bool attacking = false;
     private bool touchingFloor = true;
     private bool dashIsActive = false;
     private Vector2 dashDirection = Vector2.zero;
     private List<GameObject> projectileList = new List<GameObject>();
 
+    private Collider2D CurrentAttackCollider = null;
+
     protected Animator animator;
 
     List<Collider2D> enemiesToHit = new List<Collider2D>();
+    List<Collider2D> enemiesHit = new List<Collider2D>();
     ContactFilter2D contactFilter = new ContactFilter2D();
 
     protected virtual void Start()
@@ -430,16 +435,20 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
     public virtual void Move(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
-        
-        if(moveInput.x < 0)
+
+        if (moveInput.x < 0)
         {
             gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
-        else if(moveInput.x > 0)
+        else if (moveInput.x > 0)
         {
             gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
-        animator.Play("run");
+        if (!attacking)
+        {
+            animator.Play("run");
+        }
+        
     }
 
     public void Jump(InputAction.CallbackContext context)
@@ -447,7 +456,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
         if (context.performed)
         {
             touchingFloor = Physics2D.OverlapCircle(feetPos.position, checkRadius, floor);
-            if (startJumps > 0 || touchingFloor)
+            if (startJumps > 0 || touchingFloor && !attacking)
             {
                 rb.velocity += Vector2.up * jumpHight;
                 animator.Play("jump");
@@ -463,10 +472,13 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
     {
         if (activateDash)
         {
-            if (!dashIsActive && rb.velocity != Vector2.zero)
+            if (!dashIsActive && rb.velocity != Vector2.zero && !attacking)
             {
-                animator.Play("dash");
-                if (rb.velocity.x < 0)
+                if (!attacking)
+                {
+                    animator.Play("dash");
+                }
+                if (rb.velocity.x < 0)  
                 {
                     dashDirection += Vector2.left;
                 }
@@ -481,7 +493,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
 
     private void FixedUpdate()
     {
-        if (!dashIsActive)
+        if (!dashIsActive && !attacking)
         {
             rb.velocity = new Vector2(moveInput.x * speed, rb.velocity.y);
         }
@@ -489,8 +501,13 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
 
     private void Update()
     {
-        if (!dashIsActive) return;
-        
+        if (attacking && CurrentAttackCollider)
+        {
+            CurrentAttackCollider.gameObject.GetComponent<Collider2D>().OverlapCollider(contactFilter, enemiesToHit);
+            DamageEnemiesInCollider(damageValue);
+        }
+
+        if (!dashIsActive || attacking) return;
         if (startingDashTime < 0)
         {
             dashIsActive = false;
@@ -540,10 +557,9 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
         health = 100;
     }
 
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.layer == 3)
+        if (collision.gameObject.layer == 3 && !attacking)
         {
             animator.Play("IdleAnimation");
         }
@@ -555,27 +571,32 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
         {
             foreach (Collider2D enemy in enemiesToHit)
             {
-                enemy.GetComponent<PlayableCharacter>().TakeDamage(damageValue);
-                enemy.GetComponent<PlayableCharacter>().Hurt();
+                if (!enemiesHit.Contains(enemy))
+                {
+                    enemy.GetComponent<PlayableCharacter>().TakeDamage(damageValue);
+                    enemy.GetComponent<PlayableCharacter>().Hurt();
+                    enemiesHit.Add(enemy);
+                }
             }
-            enemiesToHit.Clear();
         }
+        enemiesToHit.Clear();
     }
+
     public void Attack(string attackType)
     {
-        float damageValue = 0;
+        enemiesHit.Clear();
         switch (attackType)
         {
             case "lightAttack":
-                LightAttackObject.gameObject.GetComponent<Collider2D>().OverlapCollider(contactFilter, enemiesToHit);
+                CurrentAttackCollider = LightAttackObject.gameObject.GetComponent<Collider2D>();
                 damageValue = LightDmg;
                 break;
             case "heavyAttack":
-                HeavyAttackbject.gameObject.GetComponent<Collider2D>().OverlapCollider(contactFilter, enemiesToHit);
+                CurrentAttackCollider = HeavyAttackbject.gameObject.GetComponent<Collider2D>();
                 damageValue = heavyDmg;
                 break;
             case "ultimateAttack":
-                UltimateAttackObject.gameObject.GetComponent<Collider2D>().OverlapCollider(contactFilter, enemiesToHit);
+                CurrentAttackCollider = UltimateAttackObject.gameObject.GetComponent<Collider2D>();
                 damageValue = ultimateDmg;
                 break;
             case "distanceAttack":
@@ -600,7 +621,13 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
                 }
                 break;
         }
-        DamageEnemiesInCollider(damageValue);
+        attacking = true;
+    }
 
+    public void StopAttack()
+    {
+        attacking = false;
+        damageValue = 0;
+        CurrentAttackCollider = null;
     }
 }

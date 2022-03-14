@@ -411,6 +411,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lancer
       objectReference: {fileID: 0}
+    - target: {fileID: 496462350536754923, guid: 171659cce19c42a4281cdcb041f5e8b3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 171659cce19c42a4281cdcb041f5e8b3, type: 3}
 --- !u!1 &681227139
@@ -785,6 +789,7 @@ GameObject:
   - component: {fileID: 1543380966}
   - component: {fileID: 1543380965}
   - component: {fileID: 1543380964}
+  - component: {fileID: 1543380967}
   m_Layer: 3
   m_Name: Square
   m_TagString: Untagged
@@ -883,6 +888,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &1543380967
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543380963}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 6200000, guid: c9c0be4a67f895945a84fdfcadb02902, type: 2}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1001 &1732482505
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1161,6 +1187,14 @@ PrefabInstance:
     - target: {fileID: 1761551795, guid: e23a080e3f572d14bb1ec022a07d3f42, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.484
+      objectReference: {fileID: 0}
+    - target: {fileID: 8269355903765545255, guid: e23a080e3f572d14bb1ec022a07d3f42, type: 3}
+      propertyPath: m_Size.x
+      value: 0.70777416
+      objectReference: {fileID: 0}
+    - target: {fileID: 8269355903765545255, guid: e23a080e3f572d14bb1ec022a07d3f42, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.62851214
       objectReference: {fileID: 0}
     - target: {fileID: 8269355904609917972, guid: e23a080e3f572d14bb1ec022a07d3f42, type: 3}
       propertyPath: m_Name
