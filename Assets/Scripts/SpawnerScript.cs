@@ -28,9 +28,9 @@ public class SpawnerScript : MonoBehaviour
         yield return new WaitForSeconds(respawnTime);
         EventManager.playerSpawn();
         player.transform.position = gameObject.transform.position;
-        player.GetComponent<PlayableCharacter>().Invincible = true; // Si el parametro lo pasas en la forma de PlayableCharacter no hay necesidad de usar GetComponent
+        //player.GetComponent<PlayableCharacter>().IsInvincible = true; // Si el parametro lo pasas en la forma de PlayableCharacter no hay necesidad de usar GetComponent
         yield return new WaitForSeconds(playerInvicibleTime);       // La funcion Spawn no debe ser la encargada de hacer invulnerable a un jugador. Separar la funcion
-        player.GetComponent<PlayableCharacter>().Invincible = false;
+        //player.GetComponent<PlayableCharacter>().IsInvincible = false;
         //Recuerda Usar la S en SOLID. Single Resposabilitie.
     }
 }

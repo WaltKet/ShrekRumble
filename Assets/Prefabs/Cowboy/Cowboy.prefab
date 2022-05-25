@@ -401,38 +401,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c73358bb1edb1b4da7ca7ea4ef2b086, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  lightDmg: 5
-  lightAttackObject: {fileID: 8269355903847618213}
-  heavyDmg: 10
-  heavyAttackObject: {fileID: 8269355904508065268}
-  airLightDmg: 0
-  airLightAttackObject: {fileID: 0}
-  airHeavyDmg: 0
-  airHeavyAttackObject: {fileID: 0}
-  ultimateDmg: 3
-  ultimateAttackObject: {fileID: 8269355903765545305}
-  distanceAttackDmg: 5
-  distanceAttackObject: {fileID: 2969268015713512816, guid: 70fbe9520b3138f45b0dc916e06743b9, type: 3}
-  maxDistanceAttackObject: 4
-  distanceAttackObjectStartPosition: {fileID: 1761551794}
-  speed: 10
-  dashSpeed: 20
-  dashTime: 0.3
-  jumpHight: 11
-  extreJumps: 0
-  checkRadius: 0.3
-  activateDash: 1
-  usesForceMovement: 0
-  jumpButton: 
-  dashButton: 
-  feetPos: {fileID: 8269355903376760047}
-  rb: {fileID: 8269355904609917969}
-  floor:
+  _currentHealth: 0
+  _lightAttackObject: {fileID: 0}
+  _heavyAttackObject: {fileID: 0}
+  _airLightAttackObject: {fileID: 0}
+  _airHeavyAttackObject: {fileID: 0}
+  _ultimateAttackObject: {fileID: 0}
+  _distanceAttackObject: {fileID: 0}
+  _maxDistanceAttackObject: 0
+  _distanceAttackObjectStartPosition: {fileID: 0}
+  _checkRadius: 0
+  _activateDash: 1
+  _usesForceMovement: 0
+  _jumpButton: 
+  _dashButton: 
+  _feetPos: {fileID: 0}
+  _rb: {fileID: 0}
+  _floor:
     serializedVersion: 2
-    m_Bits: 8
-  invincible: 0
+    m_Bits: 0
+  _invincible: 0
   moveInput: {x: 0, y: 0}
+  _baseStats: {fileID: 11400000, guid: e01419362583447f28d0a89df278d095, type: 2}
 --- !u!114 &8269355904609917981
 MonoBehaviour:
   m_ObjectHideFlags: 0

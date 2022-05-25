@@ -51,18 +51,18 @@ public class Projectile : ProjectileFather
     }
 
     ///<summary>
-    ///Determina qué tan rápido se moverá el proyectil.
+    ///Determina quï¿½ tan rï¿½pido se moverï¿½ el proyectil.
     ///</summary>
     [SerializeField]
     private float speed;
     ///<summary>
-    ///Determina la distancia máxima que puede viajar el proyectil antes de destruirse.
+    ///Determina la distancia mï¿½xima que puede viajar el proyectil antes de destruirse.
     ///</summary>
     [SerializeField]
     private float maxDistance;
     ///<summary>
-    ///Esta es una lista de STRINGS que se utiliza para determinar si el proyectil se destruirá al colisionar con un objeto. 
-    ///Si el tag del objeto con el que colisionó el proyectil existe dentro de la lista, el proyectil no se destruirá.
+    ///Esta es una lista de STRINGS que se utiliza para determinar si el proyectil se destruirï¿½ al colisionar con un objeto. 
+    ///Si el tag del objeto con el que colisionï¿½ el proyectil existe dentro de la lista, el proyectil no se destruirï¿½.
     ///</summary>
     [SerializeField]
     private List<string> dontDestroyOnCollision = new List<string>();
@@ -131,7 +131,7 @@ public class Projectile : ProjectileFather
             }
             if(collision.gameObject.GetComponent<PlayableCharacter>())
             {
-                collision.gameObject.GetComponent<PlayableCharacter>().TakeDamage(Damage);
+                collision.gameObject.GetComponent<PlayableCharacter>().ApplyDamage(Damage);
             }
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
             StartCoroutine(DestroyProyectile());

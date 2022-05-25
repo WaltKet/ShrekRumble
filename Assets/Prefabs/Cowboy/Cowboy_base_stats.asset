@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ecab846f0e634553b54017f194fbb8c, type: 3}
+  m_Name: Cowboy_base_stats
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterBaseStats_SO
+  _health: 8
+  _walkSpeed: 8
+  _dashSpeed: 8
+  _dashDuration: 8
+  _jumpHeight: 8
+  _extraJumps: 8
+  _lightAttackDmg: 8
+  _heavyAttackDmg: 8
+  _inAirAttackLightDmg: 8
+  _inAirHeavyDmg: 8
+  _ultimateAttackDmg: 8
+  _distanceAttackDmg: 8
+  _maxAttackRange: 8

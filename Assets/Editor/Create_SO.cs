@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
-public interface IDamager
+public class Create_SO 
 {
-    void DoDamage(IDamageable damageable); 
+    
 }

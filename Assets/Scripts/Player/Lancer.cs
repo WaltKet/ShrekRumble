@@ -5,8 +5,4 @@ using UnityEngine.InputSystem;
 
 public class Lancer : PlayableCharacter
 {
-    private void Awake()
-    {
-        SetHealth(100f);
-    }
 }

@@ -3,384 +3,74 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
+public abstract class PlayableCharacter : MonoBehaviour, IDamageableEntity, IDamagerEntity
 {
     //Este codigo esta basado en los videos https://www.youtube.com/watch?v=w4YV8s9Wi3w&list=PLLTae1_1NyOOqKBz2WXeqrWRhvD0ttv5L&index=16&t=284s
     //y https://www.youtube.com/watch?v=j111eKN8sJw&t=2s.
+    
+    public GameObject LightAttackObject => _lightAttackObject;
+    public GameObject HeavyAttackObject => _heavyAttackObject;
+    public GameObject AirLightAttackObject => _airLightAttackObject;
+    public GameObject AirHeavyAttackObject => _airHeavyAttackObject;
+    public GameObject UltimateAttackObject => _ultimateAttackObject;
+    public GameObject DistanceAttackObject => _distanceAttackObject;
+    public int MaxDistanceAttackObject => _maxDistanceAttackObject;
+    public GameObject DistanceAttackObjectStartPosition => _distanceAttackObjectStartPosition;
+    public float CheckRadius => _checkRadius;
+    public bool ActivateDash => _activateDash;
+    public bool UsesForceMovement => _usesForceMovement;
+    public string JumpButton => _jumpButton;
+    public string DashButton => _dashButton;
+    public Transform FeetPos => _feetPos;
+    public Rigidbody2D Rb => _rb;
+    public LayerMask Floor => _floor;
+    public bool IsInvincible => _invincible;
+    public float Health => _currentHealth;
 
-    public float LightDmg
-    {
-        get
-        {
-            return lightDmg;
-        }
-        set
-        {
-            lightDmg = value;
-        }
-    }
-    public GameObject LightAttackObject
-    {
-        get
-        {
-            return lightAttackObject;
-        }
-        set
-        {
-            lightAttackObject = value;
-        }
-    }
-    public float HeavyDmg
-    {
-        get
-        {
-            return heavyDmg;
-        }
-        set
-        {
-            heavyDmg = value;
-        }
-    }
-    public GameObject HeavyAttackbject
-    {
-        get
-        {
-            return heavyAttackObject;
-        }
-        set
-        {
-            heavyAttackObject = value;
-        }
-    }
-    public float AirLightDmg
-    {
-        get
-        {
-            return airLightDmg;
-        }
-        set
-        {
-            airLightDmg = value;
-        }
-    }
-    public GameObject AirLightAttackObject
-    {
-        get
-        {
-            return airLightAttackObject;
-        }
-        set
-        {
-            airLightAttackObject = value;
-        }
-    }
-    public float AirHeavyDmg
-    {
-        get
-        {
-            return airHeavyDmg;
-        }
-        set
-        {
-            airHeavyDmg = value;
-        }
-    }
-    public GameObject AirHeavyAttackObject
-    {
-        get
-        {
-            return airHeavyAttackObject;
-        }
-        set
-        {
-            airHeavyAttackObject = value;
-        }
-    }
-    public float UltimateDmg
-    {
-        get
-        {
-            return ultimateDmg;
-        }
-        set
-        {
-            ultimateDmg = value;
-        }
-    }
-    public GameObject UltimateAttackObject
-    {
-        get
-        {
-            return ultimateAttackObject;
-        }
-        set
-        {
-            ultimateAttackObject = value;
-        }
-    }
-    public float DistanceAttackDmg
-    {
-        get
-        {
-            return distanceAttackDmg;
-        }
-        set
-        {
-            distanceAttackDmg = value;
-        }
-    }
-    public GameObject DistanceAttackObject
-    {
-        get
-        {
-            return distanceAttackObject;
-        }
-        set
-        {
-            distanceAttackObject = value;
-        }
-    }
-    public int MaxDistanceAttackObject
-    {
-        get
-        {
-            return maxDistanceAttackObject;
-        }
-        set
-        {
-            maxDistanceAttackObject = value;
-        }
-    }
-    public GameObject DistanceAttackObjectStartPosition
-    {
-        get
-        {
-            return distanceAttackObjectStartPosition;
-        }
-        set
-        {
-            value = distanceAttackObjectStartPosition;
-        }
-    }
-
-    public float Speed
-    {
-        get
-        {
-            return speed;
-        }
-        set
-        {
-            speed = value;
-        }
-    }
-    public float DashSpeed
-    {
-        get
-        {
-            return dashSpeed;
-        }
-        set
-        {
-            dashSpeed = value;
-        }
-    }
-    public float DashTime
-    {
-        get
-        {
-            return dashTime;
-        }
-        set
-        {
-            dashTime = value;
-        }
-    }
-    public float JumpHight
-    {
-        get
-        {
-            return jumpHight;
-        }
-        set
-        {
-            jumpHight = value;
-        }
-    }
-
-    public int ExtraJumps
-    {
-        get
-        {
-            return extreJumps;
-        }
-        set
-        {
-            extreJumps = value;
-        }
-    }
-    public float CheckRadius
-    {
-        get
-        {
-            return checkRadius;
-        }
-        set
-        {
-            checkRadius = value;
-        }
-    }
-    public bool ActivateDash
-    {
-        get
-        {
-            return activateDash;
-        }
-        set
-        {
-            activateDash = value;
-        }
-    }
-    public bool UsesForceMovement
-    {
-        get
-        {
-            return usesForceMovement;
-        }
-        set
-        {
-            usesForceMovement = value;
-        }
-    }
-    public string JumpButton
-    {
-        get
-        {
-            return jumpButton;
-        }
-        set
-        {
-            jumpButton = value;
-        }
-    }
-    public string DashButton
-    {
-        get
-        {
-            return dashButton;
-        }
-        set
-        {
-            dashButton = value;
-        }
-    }
-    public Transform FeetPos
-    {
-        get
-        {
-            return feetPos;
-        }
-        set
-        {
-            feetPos = value;
-        }
-    }
-    public Rigidbody2D Rb
-    {
-        get
-        {
-            return rb;
-        }
-        set
-        {
-            rb = value;
-        }
-    }
-    public LayerMask Floor
-    {
-        get
-        {
-            return floor;
-        }
-        set
-        {
-            floor = value;
-        }
-    }
-    public bool Invincible
-    {
-        set
-        {
-            invincible = value;
-        }
-    }
-
-    public float Health => throw new System.NotImplementedException();
-
-    float IDamageable.Health { get =>  health; set => health = value; }
 
     [SerializeField]
-    private float health = 0;
+    private float _currentHealth;
     [SerializeField]
-    private float lightDmg = 0;
+    private GameObject _lightAttackObject;
     [SerializeField]
-    private GameObject lightAttackObject;
+    private GameObject _heavyAttackObject;
     [SerializeField]
-    private float heavyDmg = 0;
+    private GameObject _airLightAttackObject;
     [SerializeField]
-    private GameObject heavyAttackObject;
+    private GameObject _airHeavyAttackObject;
     [SerializeField]
-    private float airLightDmg = 0;
+    private GameObject _ultimateAttackObject;
     [SerializeField]
-    private GameObject airLightAttackObject;
+    private GameObject _distanceAttackObject;
     [SerializeField]
-    private float airHeavyDmg = 0;
+    private int _maxDistanceAttackObject;
     [SerializeField]
-    private GameObject airHeavyAttackObject;
+    private GameObject _distanceAttackObjectStartPosition;
+    
     [SerializeField]
-    private float ultimateDmg = 0;
+    private float _checkRadius;
     [SerializeField]
-    private GameObject ultimateAttackObject;
+    private bool _activateDash = true;
     [SerializeField]
-    private float distanceAttackDmg = 0;
+    private bool _usesForceMovement = false;
     [SerializeField]
-    private GameObject distanceAttackObject;
+    private string _jumpButton;
     [SerializeField]
-    private int maxDistanceAttackObject;
+    private string _dashButton;
     [SerializeField]
-    private GameObject distanceAttackObjectStartPosition;
-
+    private Transform _feetPos;
     [SerializeField]
-    private float speed = 0;
+    private Rigidbody2D _rb;
     [SerializeField]
-    private float dashSpeed = 0;    
+    private LayerMask _floor;
     [SerializeField]
-    private float dashTime = 0;
-    [SerializeField]
-    private float jumpHight = 0;
-    [SerializeField]
-    private int extreJumps = 0;
-    [SerializeField]
-    private float checkRadius;
-    [SerializeField]
-    private bool activateDash = true;
-    [SerializeField]
-    private bool usesForceMovement = false;
-    [SerializeField]
-    private string jumpButton;
-    [SerializeField]
-    private string dashButton;
-    [SerializeField]
-    private Transform feetPos;
-    [SerializeField]
-    private Rigidbody2D rb;
-    [SerializeField]
-    private LayerMask floor;
-    [SerializeField]
-    private bool invincible = false;
+    private bool _invincible = false;
 
     [SerializeField]
     private Vector2 moveInput;
+    
+    [SerializeField]
+    private CharacterBaseStatsSO _baseStats;
 
     private float startingDashTime = 0;
     private float damageValue = 0;
@@ -395,15 +85,15 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
 
     protected Animator animator;
 
-    List<Collider2D> enemiesToHit = new List<Collider2D>();
-    List<Collider2D> enemiesHit = new List<Collider2D>();
-    ContactFilter2D contactFilter = new ContactFilter2D();
+    private readonly List<Collider2D> _enemiesToHit = new List<Collider2D>();
+    private readonly List<Collider2D> _enemiesHit = new List<Collider2D>();
+    private ContactFilter2D _contactFilter = new ContactFilter2D();
 
     protected virtual void Start()
     {
-        startingDashTime = dashTime;
-        startJumps = extreJumps;
-        rb = gameObject.GetComponent<Rigidbody2D>();
+        startingDashTime = _baseStats.DashDuration;
+        startJumps = _baseStats.ExtraJumps;
+        _rb = gameObject.GetComponent<Rigidbody2D>();
         animator = gameObject.GetComponent<Animator>();
         EventManager.playerSpawnEvent += RestoreHealth;
     }
@@ -419,7 +109,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
     }
     public virtual void Hurt()
     {
-        if (health > 0)
+        if (_currentHealth > 0)
         animator.Play("hurt");
     }
     public virtual void DoUltimateAttack(InputAction.CallbackContext context)
@@ -455,34 +145,34 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
     {
         if (context.performed)
         {
-            touchingFloor = Physics2D.OverlapCircle(feetPos.position, checkRadius, floor);
+            touchingFloor = Physics2D.OverlapCircle(_feetPos.position, _checkRadius, _floor);
             if (startJumps > 0 || touchingFloor && !attacking)
             {
-                rb.velocity += Vector2.up * jumpHight;
+                _rb.velocity += Vector2.up * _baseStats.JumpHeight;
                 animator.Play("jump");
             }
             if (touchingFloor)
             {
-                startJumps = extreJumps;
+                startJumps = _baseStats.ExtraJumps;
             }
         }
     }
 
     public virtual void Dash(InputAction.CallbackContext context)
     {
-        if (activateDash)
+        if (_activateDash)
         {
-            if (!dashIsActive && rb.velocity != Vector2.zero && !attacking)
+            if (!dashIsActive && _rb.velocity != Vector2.zero && !attacking)
             {
                 if (!attacking)
                 {
                     animator.Play("dash");
                 }
-                if (rb.velocity.x < 0)  
+                if (_rb.velocity.x < 0)  
                 {
                     dashDirection += Vector2.left;
                 }
-                if (rb.velocity.x > 0)
+                if (_rb.velocity.x > 0)
                 {
                     dashDirection += Vector2.right;
                 }
@@ -495,7 +185,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
     {
         if (!dashIsActive && !attacking)
         {
-            rb.velocity = new Vector2(moveInput.x * speed, rb.velocity.y);
+            _rb.velocity = new Vector2(moveInput.x * _baseStats.WalkSpeed, _rb.velocity.y);
         }
     }
 
@@ -503,7 +193,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
     {
         if (attacking && CurrentAttackCollider)
         {
-            CurrentAttackCollider.gameObject.GetComponent<Collider2D>().OverlapCollider(contactFilter, enemiesToHit);
+            CurrentAttackCollider.gameObject.GetComponent<Collider2D>().OverlapCollider(_contactFilter, _enemiesToHit);
             DamageEnemiesInCollider(damageValue);
         }
 
@@ -511,41 +201,37 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
         if (startingDashTime < 0)
         {
             dashIsActive = false;
-            startingDashTime = dashTime;
+            startingDashTime = _baseStats.DashDuration;
             dashDirection = Vector2.zero;
-            rb.velocity = Vector2.zero;
+            _rb.velocity = Vector2.zero;
         }
         else if (dashIsActive)
         {
             startingDashTime -= Time.deltaTime;
-            rb.velocity = dashDirection * dashSpeed;
+            _rb.velocity = dashDirection * _baseStats.DashSpeed;
         }
     }
+    
 
-    public void SetHealth(float hp)
+    public void ApplyDamage(float dmg)
     {
-        health = hp;
-    }
-
-    public void TakeDamage(float dmg)
-    {
-        health -= dmg;
+        _currentHealth -= dmg;
         Die();
     }
 
     public void HealDamage(float dmg)
     {
-        health += dmg;
+        _currentHealth += dmg;
     }
 
-    public void DoDamage(IDamageable damageable)
+    public void DoDamage(IDamageableEntity damageableEntity)
     {
-        damageable.TakeDamage(10f);
+        damageableEntity.ApplyDamage(10f);
     }
 
     private void Die()
     {
-        if (health <= 0)
+        if (_currentHealth <= 0)
         {
             animator.Play("death");
             EventManager.PlayerDeath(gameObject);
@@ -554,7 +240,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
 
     private void RestoreHealth()
     {
-        health = 100;
+        _currentHealth = _baseStats.Health;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -567,43 +253,43 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
 
     private void DamageEnemiesInCollider(float damageValue)
     {
-        if (enemiesToHit.Count > 0)
+        if (_enemiesToHit.Count > 0)
         {
-            foreach (Collider2D enemy in enemiesToHit)
+            foreach (Collider2D enemy in _enemiesToHit)
             {
-                if (!enemiesHit.Contains(enemy))
+                if (!_enemiesHit.Contains(enemy))
                 {
-                    enemy.GetComponent<PlayableCharacter>().TakeDamage(damageValue);
+                    enemy.GetComponent<PlayableCharacter>().ApplyDamage(damageValue);
                     enemy.GetComponent<PlayableCharacter>().Hurt();
-                    enemiesHit.Add(enemy);
+                    _enemiesHit.Add(enemy);
                 }
             }
         }
-        enemiesToHit.Clear();
+        _enemiesToHit.Clear();
     }
 
     public void Attack(string attackType)
     {
-        enemiesHit.Clear();
+        _enemiesHit.Clear();
         switch (attackType)
         {
             case "lightAttack":
                 CurrentAttackCollider = LightAttackObject.gameObject.GetComponent<Collider2D>();
-                damageValue = LightDmg;
+                damageValue = _baseStats.LightAttackDmg;
                 break;
             case "heavyAttack":
-                CurrentAttackCollider = HeavyAttackbject.gameObject.GetComponent<Collider2D>();
-                damageValue = heavyDmg;
+                CurrentAttackCollider = HeavyAttackObject.gameObject.GetComponent<Collider2D>();
+                damageValue = _baseStats.HeavyAttackDmg;
                 break;
             case "ultimateAttack":
                 CurrentAttackCollider = UltimateAttackObject.gameObject.GetComponent<Collider2D>();
-                damageValue = ultimateDmg;
+                damageValue = _baseStats.UltimateAttackDmg;
                 break;
             case "distanceAttack":
-                if(projectileList.Count < maxDistanceAttackObject)
+                if(projectileList.Count < _maxDistanceAttackObject)
                 {
-                    GameObject projectile = Instantiate(distanceAttackObject, distanceAttackObjectStartPosition.transform.position, distanceAttackObjectStartPosition.transform.rotation);
-                    projectile.GetComponent<Projectile>().Damage = distanceAttackDmg;
+                    GameObject projectile = Instantiate(_distanceAttackObject, _distanceAttackObjectStartPosition.transform.position, _distanceAttackObjectStartPosition.transform.rotation);
+                    projectile.GetComponent<Projectile>().Damage = _baseStats.DistanceAttackDmg;
                     projectileList.Add(projectile);
                 }
                 else
@@ -612,8 +298,8 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamageable, IDamager
                     {
                         if (!projectile.activeSelf)
                         {
-                            projectile.transform.position = distanceAttackObjectStartPosition.transform.position;
-                            projectile.transform.rotation = distanceAttackObjectStartPosition.transform.rotation;
+                            projectile.transform.position = _distanceAttackObjectStartPosition.transform.position;
+                            projectile.transform.rotation = _distanceAttackObjectStartPosition.transform.rotation;
                             projectile.GetComponent<Projectile>().ReactivateProjectile();
                             break;
                         }
